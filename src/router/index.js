@@ -14,6 +14,10 @@ import {
   UserProfile,
   ProfileKonsultan,
   EditProfile,
+  Jaksel,
+  Jakpus,
+  Jakbar,
+  Jaktim,
 } from './../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNavigator} from '../components';
@@ -34,7 +38,7 @@ const MainApp = () => {
 
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="MainApp">
+    <Stack.Navigator initialRouteName="Splash">
       <Stack.Screen
         name="Splash"
         component={Splash}
@@ -90,6 +94,27 @@ const Router = () => {
         component={EditProfile}
         options={{headerShown: false}}
       />
+      <Stack.Screen
+        name="Jaksel"
+        component={Jaksel}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Jakpus"
+        component={Jakpus}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Jakbar"
+        component={Jakbar}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Jaktim"
+        component={Jaktim}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen name="LBH" component={LBH} options={{headerShown: false}} />
     </Stack.Navigator>
   );
 };

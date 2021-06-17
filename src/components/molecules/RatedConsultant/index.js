@@ -12,11 +12,11 @@ const RatedConsultant = ({onPress, name, desc, image}) => {
         <Text style={styles.text}>{desc}</Text>
       </View>
       <View style={styles.rate}>
+        {/* <ICStar width={20} height={20} />
         <ICStar width={20} height={20} />
         <ICStar width={20} height={20} />
         <ICStar width={20} height={20} />
-        <ICStar width={20} height={20} />
-        <ICStar width={20} height={20} />
+        <ICStar width={20} height={20} /> */}
       </View>
     </TouchableOpacity>
   );

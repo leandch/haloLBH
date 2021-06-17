@@ -1,20 +1,16 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import {DummyKonsultan} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-const Other = () => {
+const Other = ({text, date, image}) => {
   return (
     <View style={styles.container}>
-      <Image source={DummyKonsultan} style={styles.image} />
+      <Image source={image} style={styles.image} />
       <View>
         <View style={styles.bubleChat}>
-          <Text style={styles.text}>
-            Halo siang bu Leandra bagaimana kabarnya? apakah baik baik saja atau
-            ada keluhans
-          </Text>
+          <Text style={styles.text}>{text}</Text>
         </View>
-        <Text style={styles.date}>15.30</Text>
+        <Text style={styles.date}>{date}</Text>
       </View>
     </View>
   );

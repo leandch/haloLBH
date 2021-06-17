@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: fonts.primary[500],
     maxHeight: 50,
+    alignSelf: 'center',
   },
   content: {
     padding: 15,

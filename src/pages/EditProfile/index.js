@@ -15,13 +15,16 @@ const EditProfile = ({navigation}) => {
   });
 
   const [password, setPassword] = useState('');
-  const [imageForDB, setImageForDB] = useState('');
   const [image, setImage] = useState(ILProfilenull);
+  const [imageForDB, setImageForDB] = useState('');
 
   useEffect(() => {
     getData('user').then(res => {
       const data = res;
-      setImage({uri: res.image});
+      data.imageForDB = res?.image?.length > 1 ? res.image : ILProfilenull;
+      const tempImage =
+        res?.image?.length > 1 ? {uri: res.image} : ILProfilenull;
+      setImage(tempImage);
       setProfile(data);
     });
   }, []);
@@ -37,7 +40,7 @@ const EditProfile = ({navigation}) => {
     } else {
       updateProfile();
     }
-    navigation.replace('MainApp');
+    // navigation.replace('MainApp');
   };
 
   const updatePassword = () => {
@@ -53,18 +56,21 @@ const EditProfile = ({navigation}) => {
   const updateProfile = () => {
     const data = profile;
     data.image = imageForDB;
+    delete data.imageForDB;
     Firebase.database()
       .ref(`users/${profile.uid}/`)
       .update(data)
       .then(() => {
-        // console.log('success: ');
-        storeData('user', data);
+        storeData('user', data)
+          .then(() => {
+            navigation.replace('MainApp');
+          })
+          .catch(() => {
+            showMessage('Terjadi Masalah');
+          });
       })
       .catch(err => {
-        showMessage({
-          message: err.message,
-          type: 'warning',
-        });
+        showMessage(err.message);
       });
   };
 
@@ -77,13 +83,21 @@ const EditProfile = ({navigation}) => {
 
   const getImage = () => {
     launchImageLibrary(
-      {quality: 0.75, maxHeight: 200, maxWidth: 200, includeBase64: true},
+      {
+        quality: 0.75,
+        maxHeight: 200,
+        maxWidth: 200,
+        includeBase64: true,
+        selectionLimit: 1,
+      },
       response => {
         if (response.didCancel || response.error) {
           showMessage('Tidak Jadi ganti Foto');
         } else {
-          const source = {uri: response.uri};
-          setImageForDB(`data: ${response.type};base64, ${response.base64}`);
+          const source = {uri: response.assets[0].uri};
+          setImageForDB(
+            `data:${response.assets[0].type};base64, ${response.assets[0].base64}`,
+          );
           setImage(source);
         }
       },

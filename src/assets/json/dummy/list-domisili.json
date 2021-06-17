@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "domisili": "All"
+    },
+    {
+      "id": 2,
+      "domisili": "Jakarta Selatan"
+    },
+    {
+      "id": 3,
+      "domisili": "Jakarta Pusat"
+    },
+    {
+      "id": 4,
+      "domisili": "Jakarta Barat"
+    },
+    {
+      "id": 5,
+      "domisili": "Jakarta Timur"
+    }
+  ]
+}

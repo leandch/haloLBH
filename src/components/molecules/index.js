@@ -10,6 +10,8 @@ import ChatInput from './ChatInput';
 import UserData from './UserData';
 import ProfileItem from './ProfileItem';
 import Loading from './Loading';
+import DomisiliLBH from './DomisiliLBH';
+import ListLBH from './ListLBH';
 
 export {
   Header,
@@ -24,4 +26,6 @@ export {
   UserData,
   ProfileItem,
   Loading,
+  DomisiliLBH,
+  ListLBH,
 };

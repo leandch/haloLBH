@@ -7,7 +7,10 @@ const ProfileKonsultan = ({navigation, route}) => {
   const dataKonsultan = route.params;
   return (
     <View style={styles.page}>
-      <Header title="Profile Konsultan" onPress={() => navigation.goBack()} />
+      <Header
+        title="Profile Konsultan"
+        onPress={() => navigation.navigate('MainApp')}
+      />
       <Gap height={10} />
       <UserData
         image={{uri: dataKonsultan.data.image}}

@@ -19,10 +19,8 @@ const Home = ({navigation}) => {
   const [profile, setProfile] = useState({
     image: ILProfilenull,
     nama: '',
+    kategori: '',
   });
-
-  console.log(kategoriHukum);
-  console.log(konsultans);
 
   useEffect(() => {
     getKategoriKonsultan();
@@ -120,15 +118,17 @@ const Home = ({navigation}) => {
             <View>
               <Text style={styles.label}>Konsultan Terpercaya</Text>
               {konsultans.map(konsultan => {
-                <RatedConsultant
-                  onPress={() =>
-                    navigation.navigate('ProfileKonsultan', konsultan)
-                  }
-                  key={konsultan.id}
-                  name={konsultan.nama}
-                  desc={konsultan.kategori}
-                  image={{uri: konsultan.image}}
-                />;
+                return (
+                  <RatedConsultant
+                    onPress={() =>
+                      navigation.navigate('ProfileKonsultan', konsultan)
+                    }
+                    key={konsultan.id}
+                    name={konsultan.data.nama}
+                    desc={konsultan.data.kategori}
+                    image={{uri: konsultan.data.image}}
+                  />
+                );
               })}
             </View>
           </ScrollView>
@@ -150,8 +150,6 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
     paddingHorizontal: 20,
     flex: 1,
-    // borderBottomRightRadius: 25,
-    // borderBottomLeftRadius: 25,
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
   },

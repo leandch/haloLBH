@@ -7,13 +7,7 @@ import Profile from './Profile';
 const Header = ({onPress, title, type, text, image}) => {
   if (type === 'dark-profile') {
     return (
-      <Profile
-        onPress={onPress}
-        title={title}
-        text={text}
-        image={image}
-        type={type}
-      />
+      <Profile onPress={onPress} title={title} text={text} image={image} />
     );
   }
   return (
@@ -47,5 +41,6 @@ const styles = StyleSheet.create({
     color: type === 'dark' ? colors.text.aboveRed : colors.text.primary,
     textAlign: 'center',
     flex: 1,
+    textTransform: 'capitalize',
   }),
 });

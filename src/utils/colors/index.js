@@ -10,6 +10,7 @@ const mainColors = {
 export const colors = {
   primary: mainColors.red,
   secondary: mainColors.dark1,
+  red2: mainColors.red2,
   white: 'white',
   black: 'black',
   text: {

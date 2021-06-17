@@ -1,17 +1,32 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
-import {DummyLBHUpn} from '../../../assets/dummy';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {
+  DummyJakbar,
+  DummyJakpus,
+  DummyJaksel,
+  DummyJaktim,
+} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 
-const ListLBH = ({name, address, pic}) => {
+const ListLBH = ({domisili, onPress}) => {
+  const Cover = () => {
+    if (domisili === 'Selatan') {
+      return <DummyJaksel style={styles.gambar} />;
+    }
+    if (domisili === 'Pusat') {
+      return <DummyJakpus style={styles.gambar} />;
+    }
+    if (domisili === 'Barat') {
+      return <DummyJakbar style={styles.gambar} />;
+    }
+    if (domisili === 'Timur') {
+      return <DummyJaktim style={styles.gambar} />;
+    }
+  };
   return (
-    <View style={styles.container}>
-      <Image source={pic} style={styles.gambar} />
-      <View>
-        <Text style={styles.label}>{name}</Text>
-        <Text style={styles.text}>{address}</Text>
-      </View>
-    </View>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <Cover />
+    </TouchableOpacity>
   );
 };
 
@@ -19,30 +34,23 @@ export default ListLBH;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    marginTop: 15,
-    paddingBottom: 15,
-    paddingTop: 15,
-    borderBottomWidth: 0.5,
-    borderBottomColor: '#DADADA',
-    alignItems: 'center',
+    marginBottom: 16,
+    marginLeft: 26,
   },
   gambar: {
-    width: 83,
-    height: 62,
-    borderRadius: 10,
-    marginLeft: 37,
-    marginRight: 16,
+    width: 150,
+    height: 150,
+    borderRadius: 20,
   },
   label: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: fonts.primary[500],
-    color: colors.text.primary,
+    color: colors.text.aboveRed,
     maxWidth: 160,
   },
   text: {
     fontSize: 12,
-    fontFamily: fonts.primary[400],
-    color: '#977D7D',
+    fontFamily: fonts.primary[600],
+    color: colors.text.aboveRed,
   },
 });

@@ -1,25 +1,52 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {DummyKonsultan, DummyKonsultan1, ILChat} from '../../assets';
-import {Gap} from '../../components/atoms';
-import {ListUser} from '../../components';
-import {colors, fonts} from '../../utils';
+import {ILChat} from '../../assets';
+import {Gap, ListUser} from '../../components';
+import {colors, fonts, getData} from '../../utils';
+import {Firebase} from '../../config';
 
 const Messages = ({navigation}) => {
-  const [konsultans] = useState([
-    {
-      id: 1,
-      image: DummyKonsultan,
-      name: 'Mardian Rizky, S.H',
-      text: 'Halo pak, apakah kasus tsb...',
-    },
-    {
-      id: 2,
-      image: DummyKonsultan1,
-      name: 'Hadi Kurnia, S.H',
-      text: 'Sebaiknya seperti apa yak pak karna....',
-    },
-  ]);
+  const [user, setUser] = useState({});
+  const [historyChat, setHistoryChat] = useState([]);
+
+  useEffect(() => {
+    getDataUserFromLocal();
+    const rootDB = Firebase.database().ref();
+    const urlHistory = `messages/${user.uid}/`;
+    const messagesDB = rootDB.child(urlHistory);
+
+    messagesDB.on('value', async snapshot => {
+      console.log('data history: ', snapshot.val());
+      if (snapshot.val()) {
+        const oldData = snapshot.val();
+        const data = [];
+
+        const promises = await Object.keys(oldData).map(async key => {
+          const urlUIDKonsultan = `konsultans/${oldData[key].uidPartner}`;
+          const detailKonsultan = await rootDB
+            .child(urlUIDKonsultan)
+            .once('value');
+          console.log('detail konsultan: ', detailKonsultan.val());
+          data.push({
+            id: key,
+            detailKonsultan: detailKonsultan.val(),
+            ...oldData[key],
+          });
+        });
+
+        await Promise.all(promises);
+
+        setHistoryChat(data);
+      }
+    });
+  }, [user.uid]);
+
+  const getDataUserFromLocal = () => {
+    getData('user').then(res => {
+      setUser(res);
+    });
+  };
+
   return (
     <View style={styles.page}>
       <View style={styles.container}>
@@ -28,14 +55,18 @@ const Messages = ({navigation}) => {
           <Gap width={5} />
           <Text style={styles.header}>Messages</Text>
         </View>
-        {konsultans.map(konsultan => {
+        {historyChat.map(chat => {
+          const dataKonsultan = {
+            id: chat.detailKonsultan.uid,
+            data: chat.detailKonsultan,
+          };
           return (
             <ListUser
-              key={konsultan.id}
-              image={konsultan.image}
-              name={konsultan.name}
-              text={konsultan.text}
-              onPress={() => navigation.navigate('Chat', konsultan)}
+              key={chat.id}
+              image={{uri: chat.detailKonsultan.image}}
+              name={chat.detailKonsultan.nama}
+              text={chat.lastChat}
+              onPress={() => navigation.navigate('Chat', dataKonsultan)}
             />
           );
         })}

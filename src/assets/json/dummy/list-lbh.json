@@ -1,0 +1,44 @@
+{
+  "data": [
+    {
+      "lbh": "LBH Jakarta",
+      "alamat": "Jl. Pangeran Diponegoro",
+      "domisili": "Jakarta Pusat"
+    },
+    {
+      "lbh": "LKBH UPN Veteran Jakarta",
+      "alamat": "Jl. Fatmawati",
+      "domisili": "Jakarta Selatan"
+    },
+    {
+      "lbh": "Yayasan LBH Indonesia",
+      "alamat": "Jl. Pangeran Diponegoro No.74",
+      "domisili": "Jakarta Pusat"
+    },
+    {
+      "lbh": "LBH Tridharma Indonesia",
+      "alamat": "Jl. Harsono RM",
+      "domisili": "Jakarta Selatan"
+    },
+    {
+      "lbh": "LBH KHM Indonesia",
+      "alamat": "Jl. Jelambar Barat",
+      "domisili": "Jakarta Barat"
+    },
+    {
+      "lbh": "LBH ADFOTICE",
+      "alamat": "Jl. Pangeran Tubagus Angke No.1",
+      "domisili": "Jakarta Barat"
+    },
+    {
+      " lbh": "LBH Trisila",
+      "alamat": " Jl. Kayu Putih IX E No.mor 40, RT.10/RW.5, Pulo Gadung, Kec. Pulo Gadung, DKI Jakarta 13260",
+      "domisili": "Jakarta Timur"
+    },
+    {
+      "lbh": "LBH APIK",
+      "alamat": "Jl. Raya Tengah No.31, Kramat Jati",
+      "domisili": "Jakarta Timur"
+    }
+  ]
+}

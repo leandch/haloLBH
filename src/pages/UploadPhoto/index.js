@@ -10,25 +10,27 @@ import {storeData} from '../../utils';
 
 const UploadPhoto = ({navigation, route}) => {
   const {nama, pekerjaan, uid} = route.params;
-  console.log('Nama: ', nama);
-  console.log('Pekerjaan: ', pekerjaan);
 
   const [hasImage, setHasImage] = useState(false);
   const [imageForDB, setImageForDB] = useState('');
   const [image, setImage] = useState(ILProfilenull);
   const getImage = () => {
     launchImageLibrary(
-      {quality: 0.75, maxHeight: 200, maxWidth: 200, includeBase64: true},
+      {
+        quality: 0.75,
+        maxHeight: 200,
+        maxWidth: 200,
+        includeBase64: true,
+        selectionLimit: 1,
+      },
       response => {
         if (response.didCancel || response.error) {
           showMessage('Yaaah, kok foto mu tidak ditampilkan?');
         } else {
-          // console.log('response image: ', response);
-          // Firebase.database()
-          //   .ref('users/' + uid + '/')
-          //   .update({image: imageForDB});
-          const source = {uri: response.uri};
-          setImageForDB(`data: ${response.type};base64, ${response.base64}`);
+          const source = {uri: response.assets[0].uri};
+          setImageForDB(
+            `data:${response.assets[0].type};base64, ${response.assets[0].base64}`,
+          );
           setImage(source);
           setHasImage(true);
         }

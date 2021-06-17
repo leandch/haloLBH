@@ -14,7 +14,7 @@ const PilihKonsultan = ({navigation, route}) => {
   const callKonsultanByKategori = kategori => {
     Firebase.database()
       .ref('konsultans/')
-      .orderByChild('kategori_hukum')
+      .orderByChild('kategori')
       .equalTo(kategori)
       .once('value')
       .then(res => {
@@ -27,7 +27,7 @@ const PilihKonsultan = ({navigation, route}) => {
               data: oldData[item],
             });
           });
-          setListKonsultan;
+          setListKonsultan(data);
         }
       });
   };
@@ -35,7 +35,7 @@ const PilihKonsultan = ({navigation, route}) => {
     <View style={styles.page}>
       <Header
         type="dark"
-        title={`Pilih ${itemKategori.kategori_hukum}`}
+        title={`Pilih ${itemKategori.kategori}`}
         onPress={() => navigation.goBack()}
       />
       {listKonsultan.map(konsultan => {

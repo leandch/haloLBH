@@ -1,37 +1,52 @@
 import React from 'react';
-import {
-  ImageBackground,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import {DummyLBHJkt, DummyLBHUpn} from '../../assets/dummy';
-import {ILLBHUpn} from '../../assets/illustration';
-import ListLBH from '../../components/molecules/ListLBH';
-import {colors, fonts} from '../../utils';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ILFindMap} from '../../assets';
+import {fonts, colors} from '../../utils';
+import {Gap, ListLBH} from '../../components';
+// import ListLBH from '../../components/molecules/ListLBH';
 
-const LBH = () => {
+const LBH = ({navigation}) => {
   return (
     <View style={styles.page}>
-      <ImageBackground source={ILLBHUpn} style={styles.imgbg}>
-        <Text style={styles.header}>LBH di Sekitarmu</Text>
-        <Text style={styles.body}>2 LBH</Text>
-      </ImageBackground>
-      <View style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        <ILFindMap style={styles.imgPage} />
+        <Gap height={20} />
+        <View style={styles.typo}>
+          <Text style={styles.labelBlack}>Temukan</Text>
+          <Text style={styles.labelRed}> Lembaga Bantuan</Text>
+        </View>
+        <View style={styles.typo}>
+          <Text style={styles.labelRed}>Hukum</Text>
+          <Text style={styles.labelBlack}> di Sekitarmu!</Text>
+        </View>
+        <Gap height={20} />
+        {/* <Text style={styles.dom}>Jakarta</Text> */}
+        <View style={styles.domRow}>
           <ListLBH
-            name="LKBH UPN Veteran Jakarta"
-            address="Jl.Fatmawati"
-            pic={DummyLBHUpn}
+            domisili="Selatan"
+            style={styles.gambar}
+            onPress={() => navigation.navigate('Jaksel')}
           />
           <ListLBH
-            name="Lembaga Bantuan Hukum Jakarta"
-            address="Jl. Pangeran Diponegoro No.74"
-            pic={DummyLBHJkt}
+            domisili="Pusat"
+            style={styles.gambar}
+            onPress={() => navigation.navigate('Jakpus')}
           />
-        </ScrollView>
-      </View>
+        </View>
+        <View style={styles.domRow}>
+          <ListLBH
+            domisili="Barat"
+            style={styles.gambar}
+            onPress={() => navigation.navigate('Jakbar')}
+          />
+          <ListLBH
+            domisili="Timur"
+            style={styles.gambar}
+            onPress={() => navigation.navigate('Jaktim')}
+          />
+        </View>
+        <Gap height={40} />
+      </ScrollView>
     </View>
   );
 };
@@ -43,27 +58,43 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     flex: 1,
   },
-  imgbg: {
-    width: 411,
-    height: 194,
-  },
   container: {
+    paddingVertical: 30,
+    paddingHorizontal: 15,
     backgroundColor: colors.white,
-    borderRadius: 25,
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 25,
     flex: 1,
-    marginTop: -25,
+    alignContent: 'center',
   },
-  header: {
-    fontSize: 16,
+  typo: {
+    flexDirection: 'row',
+    paddingHorizontal: 15,
+  },
+  labelBlack: {
+    fontSize: 22,
     fontFamily: fonts.primary[500],
-    color: colors.white,
-    textAlign: 'center',
-    marginTop: 10,
+    color: colors.text.primary,
   },
-  body: {
-    fontSize: 14,
-    fontFamily: fonts.primary[400],
-    color: colors.white,
-    textAlign: 'center',
+  labelRed: {
+    fontSize: 22,
+    fontFamily: fonts.primary[600],
+    color: colors.primary,
+  },
+  imgPage: {
+    alignSelf: 'center',
+  },
+  domRow: {
+    flexDirection: 'row',
+  },
+  gambar: {
+    width: 150,
+    height: 150,
+    borderRadius: 20,
+  },
+  dom: {
+    fontSize: 16,
+    fontFamily: fonts.primary[600],
+    color: colors.text.primary,
   },
 });

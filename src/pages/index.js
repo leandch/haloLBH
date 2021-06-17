@@ -11,6 +11,10 @@ import Chat from './Chat';
 import UserProfile from './UserProfile';
 import ProfileKonsultan from './ProfileKonsultan';
 import EditProfile from './EditProfile';
+import Jaksel from './Jaksel';
+import Jakpus from './Jakpus';
+import Jakbar from './Jakbar';
+import Jaktim from './Jaktim';
 
 export {
   Splash,
@@ -26,4 +30,8 @@ export {
   UserProfile,
   ProfileKonsultan,
   EditProfile,
+  Jaksel,
+  Jakbar,
+  Jakpus,
+  Jaktim,
 };
