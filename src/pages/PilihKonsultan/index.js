@@ -12,6 +12,7 @@ const PilihKonsultan = ({navigation, route}) => {
   }, [itemKategori.kategori]);
 
   const callKonsultanByKategori = kategori => {
+    console.log(`kategori`, kategori)
     Firebase.database()
       .ref('konsultans/')
       .orderByChild('kategori')
@@ -19,6 +20,7 @@ const PilihKonsultan = ({navigation, route}) => {
       .once('value')
       .then(res => {
         if (res.val()) {
+          console.log(res.val());
           const oldData = res.val();
           const data = [];
           Object.keys(oldData).map(item => {
